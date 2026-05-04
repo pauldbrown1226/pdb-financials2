@@ -1,0 +1,48 @@
+<h2 mat-dialog-title>Select:&nbsp; {{ data.myType }}</h2>
+<mat-dialog-content>
+  <form [formGroup]="editForm" class="grid-container">
+    <mat-form-field>
+      <mat-label>File Name</mat-label>
+      <mat-select formControlName="fileName">
+        @for (item of fileNames; track $index) {
+        <mat-option value="{{ item }}">{{ item }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    @if(this.data.myType !== 'report') {
+
+
+    <mat-form-field>
+      <mat-label>Year</mat-label>
+      <mat-select formControlName="year">
+        <mat-option value="{{lastYear}}">{{lastYear}}</mat-option>
+        <mat-option value="{{thisYear}}">{{thisYear}}</mat-option>
+        <mat-option value="{{nextYear}}">{{nextYear}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Month</mat-label>
+      <mat-select formControlName="month">
+        <mat-option value="January">January</mat-option>
+        <mat-option value="February">February</mat-option>
+        <mat-option value="March">March</mat-option>
+        <mat-option value="April">April</mat-option>
+        <mat-option value="May">May</mat-option>
+        <mat-option value="June">June</mat-option>
+        <mat-option value="July">July</mat-option>
+        <mat-option value="August">August</mat-option>
+        <mat-option value="September">September</mat-option>
+        <mat-option value="October">October</mat-option>
+        <mat-option value="November">November</mat-option>
+        <mat-option value="December">December</mat-option>
+      </mat-select>
+    </mat-form-field>
+  }
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button matButton="tonal" [disabled]="!editForm.valid" (click)="onSubmit()">Save</button>
+  <button matButton="tonal" (click)="onClose()">Close</button>
+</mat-dialog-actions>

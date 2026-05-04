@@ -1,0 +1,171 @@
+<div>
+  <button matButton="filled" (click)="onReset()">Reset</button>
+  &nbsp;&nbsp;
+  <button matButton="filled" (click)="onOpenAddReserve('report')">Add Reserve From Report</button>
+  &nbsp;&nbsp;
+  <button matButton="filled" (click)="onOpenAddReserve('budget')">Add Reserve From Budget</button>
+  &nbsp;&nbsp;
+  <button matButton="filled" (click)="gotoAddReserve()">Add Reserve</button>
+  &nbsp;&nbsp;
+  <button matButton="filled" (click)="openEditTotals()">Edit Totals</button>
+  <p>&nbsp;</p>
+</div>
+@if (isLoading) {
+<div style="text-align: center">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+}
+
+<div class="running-total">
+  <!-- <div class="row"> -->
+  <div >
+    <p>&nbsp;</p>
+    <table class="running-total">
+      <tr>
+        <td>Quicken Reserve</td>
+        <td>
+          {{ reserveTotals.quickenTotal | currency }}
+        </td>
+      </tr>
+      <tr>
+        <td>CMA Reserve</td>
+        <td>
+          {{ reserveTotals.cmaTotal | currency }}
+        </td>
+      </tr>
+
+      <tr>
+        <td>Total Reserve</td>
+        <td>
+          {{ reserveTotal | currency }}
+        </td>
+      </tr>
+    </table>
+  </div>
+  <!-- </div> -->
+
+  <!-- https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_ref_glyph_triangle-bottom&stacked=h -->
+
+  <table class="reserve-table">
+    <thead class="thead-light">
+      <tr>
+        <th colspan="" class="text-center reserve-td"></th>
+        @for (res of reserves; track $index) { @if(res.description != 'Balance') {
+        <th colspan="2"class="reserve-td">
+          {{ res.description }}
+
+          <a
+            class="active"
+            style="cursor: pointer; color: #007bff"
+            (click)="OpenDeleteConfirmation(res)"
+            >Delete</a
+          >
+        </th>
+        } }
+      </tr>
+
+      <tr>
+        <th colspan="2" class="header reserve-td">Category</th>
+
+        @for (res of reserves; track $index) { @if (res.description !== 'Balance') {
+        <th class="header reserve-td">Subtotal</th>
+        } @if(res.description !== 'Balance') {
+        <th class="header reserve-td">
+          {{ getDescriptionType(res.description) }} <br />
+          {{ getDescriptionLabel(res.description) }}
+        </th>
+        } }
+      </tr>
+      <tr>
+        <th class="reserve-td" colspan="2">Totals:</th>
+        @for (res of reserves; track $index) { @if(res.description !== 'Balance') {
+        <th id="subtotal reserve-td" align="right">
+          {{ res.reserveSubtotal | currency }}
+        </th>
+        }
+        @if(res.description !== 'Balance') {
+        <th align="right">
+          {{ res.reserveTotal | currency }}
+        </th>
+    }
+        }
+      </tr>
+    </thead>
+    </table>    
+
+<cdk-virtual-scroll-viewport itemSize="50" class="reserve-viewport">
+  <table class="reserve-table, reserve-viewport">
+    <tbody>
+  <tr *cdkVirtualFor="let entry of reserveEntries let i = index" class="scroll-row" >
+        
+        <!-- @for (entry of reserveEntries; track $index; let i = $index) { -->
+      <!-- <tr id="row{{i}}"> -->
+        
+        <td colspan="2"  class="reserve-td">
+          <a class="active" style="cursor: pointer; color: #007bff" (click)="onHighLightRow(i)">{{
+            entry.category.label
+          }}</a>
+          &nbsp;
+          <a
+            class="active"
+            style="cursor: pointer; color: #5100ff"
+            (click)="onClickShowRunningBalance(entry.category)"
+            >Running bal</a
+          >
+          &nbsp;
+          <a
+            class="active"
+            style="cursor: pointer; color: #006aff"
+            (click)="
+              OnClickeDisplayCategoryExpensesByMonth(
+                entry.category.categoryId,
+                'CategoryExpensesByMonth',
+                currentYear,
+                '01',
+                'reserve'
+              )
+            "
+          >
+            Hist</a
+          >
+        </td>
+        @for (res of reserves; track $index; let ii = $index) {
+        
+          @if(res.description !== 'Balance') {  
+          <td class="reserve-td" id="{{ isHighLightSubtotal(i, ii) }}" align="right">
+            {{ getSubtotal(res, i) | currency }}
+          </td>
+        }
+        @if(res.description !== 'Balance') {  
+          <td  class="reserve-td" id="{{ isHighLightRow(i, ii) }}" align="right">
+            {{ getAmount(res, i) != 0 ? (getAmount(res, i) | currency) : '&nbsp;' }}
+          </td>
+        }
+    }
+      </tr>
+      </tbody>
+      </table>
+      </cdk-virtual-scroll-viewport>  
+    
+    <!-- } -->
+<table  class="reserve-table">
+      <tr>
+        <td colspan="2" class="reserve-td">Totals:</td>
+        @for (res of reserves; track $index; let ii = $index) {
+           @if(res.description !== 'Balance') {  
+          <td align="right" class="reserve-td">
+            {{ res.reserveSubtotal | currency }}
+          </td>
+        }
+          @if(res.description !== 'Balance') {
+          <td align="right" class="reserve-td">
+            {{ res.reserveTotal | currency }}
+          </td>
+        }
+        }
+      </tr>
+
+    
+  </table>
+  
+</div>

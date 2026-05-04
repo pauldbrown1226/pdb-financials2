@@ -1,0 +1,11 @@
+<mat-toolbar class="custom-toolbar">
+    <span ><a class="mat-toolbar" href="#">Pauls Financials</a></span>
+    <mat-button-toggle-group>
+    <mat-button-toggle  (click)= "handleNavigation('categories')">Categories</mat-button-toggle>
+    <mat-button-toggle (click)= "handleNavigation('reports')">Reports</mat-button-toggle>
+    <mat-button-toggle (click)= "handleNavigation('budgets')">Budgets</mat-button-toggle>
+    <mat-button-toggle (click)= "handleNavigation('reserve')">Reserve</mat-button-toggle>
+    <mat-button-toggle (click)= "handleNavigation('planner')">Planner</mat-button-toggle>
+  </mat-button-toggle-group>
+
+</mat-toolbar>

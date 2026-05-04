@@ -1,0 +1,30 @@
+<div class="heading-div" >
+  <h4>Add Report</h4>
+  <button matButton="filled" (click)="onClose()" style="float: right;">Close</button>
+  <p>&nbsp;</p>
+  </div>
+
+  <div class="container">
+    <table style="align-content: center">
+      <thead class="thead-light">
+        <tr>
+          <th class="sticky">Report files</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (reportFile of reportFiles; let i = $index; track $index) {
+        <tr>
+          <td>
+            <a
+              class="active"
+              style="cursor: pointer; color: #007bff"
+              (click)="onSelectFile(reportFile)"
+              >{{ reportFile }}</a
+            >
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+

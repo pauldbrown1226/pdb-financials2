@@ -1,0 +1,126 @@
+<div>
+  <button matButton="filled" (click)="onReset()">Reset</button>
+  &nbsp;&nbsp;
+  <button matButton="filled" (click)="onOpenAddReserveFromFile('report')">Add Reserve From Report</button>
+  &nbsp;&nbsp;
+  <button matButton="filled" (click)="onOpenAddReserveFromFile('budget')">Add Reserve From Budget</button>
+  &nbsp;&nbsp;
+  <button matButton="filled" (click)="onOpenAddReserve()">Add Reserve</button>
+  &nbsp;&nbsp;
+  <button matButton="filled" (click)="openEditTotals()">Edit Totals</button>
+    &nbsp;&nbsp;
+  <button matButton="filled" (click)="OpenDeleteByOldestYear()">Delete by Oldest Year</button>
+
+</div>
+@if (isLoading) {
+<div style="text-align: center">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+}
+<table class="running-total">
+  <tr>
+    <td>Quicken Reserve</td>
+    <td>
+      {{ reserveTotals.quickenTotal | currency }}
+    </td>
+  </tr>
+  <tr>
+    <td>CMA Reserve</td>
+    <td>
+      {{ reserveTotals.cmaTotal | currency }}
+    </td>
+  </tr>
+
+  <tr>
+    <td>Total Reserve</td>
+    <td>
+      {{ reserveTotal | currency }}
+    </td>
+  </tr>
+</table>
+
+<table class="reserve-table">
+  <!-- <table class="reserve-table"> -->
+  <thead class="thead-light">
+    <tr>
+      <th class="sticky" colspan="2"></th>
+      @for (res of reserves; track $index; let i = $index) { @if(res.description != 'Balance') {
+      <th class="sticky" colspan="2">
+        {{ res.description }}
+        @if (i == 1) {
+        <a
+          class="active"
+          style="cursor: pointer; color: #007bff"
+          (click)="OpenDeleteConfirmation(res)"
+          >Delete</a>
+        }
+      </th>
+      } }
+    </tr>
+
+    <tr>
+      <th class="sticky" colspan="2">Category</th>
+
+      @for (res of reserves; track $index) { @if (res.description !== 'Balance') {
+      <th class="sticky">Subtotal</th>
+      } @if(res.description !== 'Balance') {
+      <th class="sticky">
+        Amount
+      </th>
+      } }
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="reserve-td" colspan="2">Totals:</td>
+      @for (res of reserves; track $index) { @if(res.description !== 'Balance') {
+      <td id="subtotal" align="right">
+        {{ res.reserveSubtotal | currency }}
+      </td>
+      } @if(res.description !== 'Balance') {
+      <td align="right">
+        {{ res.reserveTotal | currency }}
+      </td>
+      } }
+    </tr>
+    @for (entry of reserveEntries; track $index; let i = $index) {
+    <tr id="row{{ i }}" >
+      <td colspan="2" class="reserve-td">
+        <a class="active" style="cursor: pointer; color: #007bff" (click)="onHighLightRow(i)">{{
+          entry.category.label
+        }}</a>
+        &nbsp;
+        <a
+          class="active"
+          style="cursor: pointer; color: #5100ff"
+          (click)="onClickShowRunningBalance(entry.category)"
+          >Running bal</a
+        >
+      </td>
+      @for (res of reserves; track $index; let ii = $index) { 
+        @if(res.description !== 'Balance') {
+        <td class="reserve-td" id="{{ isHighLightSubtotal(i, ii) }}" align="right">
+            {{ getSubtotal(res, i) | currency }}
+        </td>
+        } @if(res.description !== 'Balance') {
+      <td class="reserve-td" id="{{ isHighLightRow(i, ii) }}" align="right">
+        {{ getAmount(res, i) != 0 ? (getAmount(res, i) | currency) : '&nbsp;' }}
+      </td>
+      } }
+    </tr>
+    }
+    <tr>
+      <td colspan="2" class="reserve-td">Totals:</td>
+      @for (res of reserves; track $index; let ii = $index) { @if(res.description !== 'Balance') {
+      <td align="right" class="reserve-td">
+        {{ res.reserveSubtotal | currency }}
+      </td>
+      } @if(res.description !== 'Balance') {
+      <td align="right" class="reserve-td">
+        {{ res.reserveTotal | currency }}
+      </td>
+      } }
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,18 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* 3 columns */
+  gap: 16px;
+  padding: 16px;
+  width: 80%;
+
+}
+
+mat-form-field {
+  width: 100%;
+
+}
+
+.description {
+  grid-column-start: 2;
+  grid-column-end: 4;
+}

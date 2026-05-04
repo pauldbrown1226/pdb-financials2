@@ -1,0 +1,19 @@
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+img {
+  width: 3.5rem;
+  object-fit: contain;
+}
+
+a {
+    margin-right: 2rem;
+    /* color: rgb(100, 51, 85); */
+    font: var(--mat-sys-body-large);
+    /* background-color:rgb(215, 168, 186) ; */
+
+    
+}
+
+/* button {
+  margin-right: 2rem
+} */
+

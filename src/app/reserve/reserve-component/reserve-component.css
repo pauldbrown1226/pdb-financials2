@@ -1,0 +1,78 @@
+table.running-total { 
+    position: relative;
+    left: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    /* padding-top: 25px; */
+    width: 300px;
+    border: 1px solid black;
+    background-color:rgb(150, 219, 222) ;
+
+}
+
+
+tr {
+    height: 35px;
+}
+
+/* reserve-td  {
+    width: 5%;
+} */
+
+table.reserve-table {
+  width: 100%;
+  background-color: rgb(228, 242, 246);
+}
+
+
+.sticky {
+  position: sticky;
+  top: 0; /* Sticks to the top of the nearest scrollable parent */
+  background-color: white; /* Prevents body content from showing through */
+  z-index: 80;
+}
+
+body {
+   height: 800px;
+}
+
+
+
+tr:nth-child(even) {
+  background-color: rgb(240, 251, 251)
+}
+
+tr:nth-child(odd) {
+  background-color: rgb(228, 242, 246)
+}
+
+#subtotal {
+  background-color:lightgray;
+}
+
+#subtotalHighlight {
+  background-color:rgb(135, 250, 150);
+}
+
+#highLightRow {
+  background-color: lightskyblue;
+}
+
+#highLightCell {
+  background-color: rgb(135, 250, 150);
+}
+
+#negative {
+  color: red;
+}
+
+/* .reserve-viewport {
+  height: 200px;
+  width: 100%;
+  border: 1px solid black;
+} */
+
+/* .scroll-row { */
+/*  height: 50px; Should match the itemSize property */
+  /* width: 1000px;
+} */

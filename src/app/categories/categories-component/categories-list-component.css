@@ -1,0 +1,82 @@
+.mat-mdc-row:nth-child(odd){
+    background-color: rgb(240, 251, 251)
+}
+
+
+
+.parent {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  width: 100%;
+  
+}
+
+.child {
+  display: flex;
+  justify-content: left; 
+  align-items: left;
+  width: 60%;
+  
+}
+
+
+
+.table-container {
+  display: flex;
+  justify-content: center;
+
+  height: 800px;
+  overflow: auto;
+  width: 100%;
+ /* background-color: yellow; */
+}
+
+
+table {
+  min-width: 60%; 
+  margin-left: auto;
+  margin-right: auto;
+  /* margin-left: 5%; */
+
+}
+
+.mat-sort-header-container {
+  justify-content: center !important;
+}
+
+.mat-column-label {
+  max-width: 80%!important;
+  max-width: 80px !important;
+}
+
+.mat-column-name {
+  max-width: 80px !important;
+  max-width: 80px !important;
+}
+
+.mat-column-type {
+  max-width: 20px !important;
+  max-width: 20px !important;
+}
+
+.mat-column-subType {
+  max-width: 20px !important;
+  max-width: 20px !important;
+}
+.mat-column-catOrder {
+  max-width: 30px !important;
+  max-width: 30px !important;
+}
+.mat-column-reserve {
+  max-width: 20px !important;
+  max-width: 20px !important;
+}
+.mat-column-budget {
+  max-width: 20px !important;
+  max-width: 20px !important;
+}
+.mat-column-delete {
+  max-width: 20px !important;
+  max-width: 20px !important;
+}

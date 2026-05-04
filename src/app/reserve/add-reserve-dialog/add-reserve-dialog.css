@@ -1,0 +1,39 @@
+.mat-mdc-row:nth-child(odd){
+    background-color: rgb(240, 251, 251)
+}
+
+
+.custom-height-field {
+  --mat-form-field-container-height: 40px; /* Set your desired height */
+  --mat-form-field-container-vertical-padding: 2px; /* Adjust padding if needed */
+  /* font-size: 10px; */
+}
+
+
+.table-container {
+  display: flex;
+  justify-content: center;
+  height: 80%;
+  overflow: auto;
+  width: 100%;
+ /* background-color: yellow; */
+}
+
+.sticky-first-row {
+  position: sticky;
+  top: 56px; /* Height of the sticky header row */
+  z-index: 10;
+  background: white; /* Required to prevent content transparency while scrolling */
+}
+
+table {
+  min-width: 100%; 
+  margin-left: auto;
+  margin-right: auto;
+  /* margin-left: 5%; */
+
+}
+
+.tr {
+    height: 15px;
+}

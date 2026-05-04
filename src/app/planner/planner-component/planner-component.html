@@ -1,0 +1,232 @@
+  <div>
+    &nbsp;
+    <button matButton="filled" (click)="onReestimate()">Reestiamate</button>
+    &nbsp;
+    <button matButton="filled" (click)="openEditPlannerDetail()">Update Details</button>
+    <p>&nbsp;</p>
+  </div>
+  @if (isLoading) {
+  <div style="text-align: center">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+  }
+
+
+  <table>
+
+    <tr>
+        <th>
+            &nbsp;&nbsp;&nbsp;
+        </th>
+        <th>
+            Ending Age &nbsp;&nbsp;         
+        </th>
+        <th>
+            Rate of Return &nbsp;&nbsp;  
+        </th>
+        <th>
+            Inflation &nbsp;&nbsp;          
+        </th>
+        <th>
+            Income Tax Rate &nbsp;&nbsp;           
+        </th>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            {{ pd.endingAge }}
+        </td>
+                <td>
+            {{ pd.rateOfReturn }}
+        </td>
+
+                <td>
+            {{ pd.inflation }}
+        </td>
+
+                <td>
+            {{ pd.incomeTaxRate }}
+        </td>
+
+    </tr>
+  </table>
+  <br>
+  <div class="table-container">
+    
+    <table mat-table [dataSource]="dataSource" [trackBy]="trackBy">
+
+
+      <!-- actEst -->
+      <ng-container matColumnDef="actEst">
+        <th mat-header-cell *matHeaderCellDef>
+            Act/Est</th>
+        <td mat-cell *matCellDef="let element">
+          <a
+          class="active"
+          style="cursor: pointer; color: #007bff"
+          (click)="openEditPlanner(element)"
+        >
+          {{ getActual(element.actual) }} <!-- Either Act or Est. Act set all the values for the Year, Est changes only Big Expenses -->
+        </a>
+      </ng-container>
+
+      /* age */
+      <ng-container matColumnDef="age">
+        <th mat-header-cell *matHeaderCellDef>
+            Age</th>
+        <td mat-cell *matCellDef="let element">
+            {{element.age}}
+      </ng-container>
+
+      <!-- year -->
+       <ng-container matColumnDef="year">
+        <th mat-header-cell *matHeaderCellDef>
+            Year</th>
+        <td mat-cell *matCellDef="let element">
+            {{element.year}}
+      </ng-container>
+
+       <!-- presentValue -->
+      <ng-container matColumnDef="presentValue">
+        <th mat-header-cell *matHeaderCellDef>
+            Pres Val</th>
+        <td mat-cell *matCellDef="let element">
+            {{element.presentValue | currency: 'USD':'symbol':'1.0-0' }}
+      </ng-container>
+
+        <!-- investment -->
+      <ng-container matColumnDef="investment">
+        <th mat-header-cell *matHeaderCellDef>
+            Investment</th>
+        <td mat-cell *matCellDef="let element">
+            {{element.investmentTotal | currency: 'USD':'symbol':'1.0-0' }}
+      </ng-container>
+
+      <!-- pension -->
+      <ng-container matColumnDef="pension">
+        <th mat-header-cell *matHeaderCellDef>
+            Pension</th>
+        <td mat-cell *matCellDef="let element">
+            {{element.paulPension | currency: 'USD':'symbol':'1.0-0' }}
+      </ng-container>
+
+
+
+    <!-- 'paulSS', -->
+      <ng-container matColumnDef="paulSS">
+        <th mat-header-cell *matHeaderCellDef>
+            P Soc</th>
+        <td mat-cell *matCellDef="let element">
+            {{element.paulSocialSecurity | currency: 'USD':'symbol':'1.0-0' }}
+      </ng-container>
+
+
+    <!-- 'naomiSS', -->
+      <ng-container matColumnDef="naomiSS">
+        <th mat-header-cell *matHeaderCellDef>
+            N Soc</th>
+        <td mat-cell *matCellDef="let element">
+            {{element.naomiSocialSecurity | currency: 'USD':'symbol':'1.0-0' }}
+      </ng-container>
+
+
+    <!-- 'totalIncome', -->
+      <ng-container matColumnDef="totalIncome">
+        <th mat-header-cell *matHeaderCellDef>
+            Tot Inc</th>
+        <td mat-cell *matCellDef="let element">
+            {{element.totalIncome | currency: 'USD':'symbol':'1.0-0' }}
+      </ng-container>
+
+
+    <!-- 'budget', -->
+      <ng-container matColumnDef="budget">
+        <th mat-header-cell *matHeaderCellDef>
+            Budget</th>
+        <td mat-cell *matCellDef="let element">
+            {{element.budget | currency: 'USD':'symbol':'1.0-0' }}
+      </ng-container>
+
+
+    <!-- 'invInc', -->
+      <ng-container matColumnDef="invInc">
+        <th mat-header-cell *matHeaderCellDef>
+            Inv Inc</th>
+        <td mat-cell *matCellDef="let element">
+            {{element.investmentIncome | currency: 'USD':'symbol':'1.0-0' }}
+      </ng-container>
+
+
+    <!-- 'grossInc', -->
+      <ng-container matColumnDef="grossInc">
+        <th mat-header-cell *matHeaderCellDef>
+            Gross Inc</th>
+        <td mat-cell *matCellDef="let element">
+            {{element.grossIncome | currency: 'USD':'symbol':'1.0-0' }}
+      </ng-container>
+
+
+    <!-- 'incoNeeded', -->
+      <ng-container matColumnDef="incoNeeded">
+        <th mat-header-cell *matHeaderCellDef>
+            Inc Needed</th>
+        <td mat-cell *matCellDef="let element">
+            {{element.incomeNeeded | currency: 'USD':'symbol':'1.0-0' }}
+      </ng-container>
+
+
+    <!-- 'incTax', -->
+      <ng-container matColumnDef="incTax">
+        <th mat-header-cell *matHeaderCellDef>
+            Inc Tax</th>
+        <td mat-cell *matCellDef="let element">
+            {{element.incomeTax | currency: 'USD':'symbol':'1.0-0' }}
+      </ng-container>
+
+
+    <!-- 'neededFromInv', -->
+      <ng-container matColumnDef="neededFromInv">
+        <th mat-header-cell *matHeaderCellDef>
+            Needed from Inv</th>
+        <td mat-cell *matCellDef="let element">
+            {{element.neededFromInvestments | currency: 'USD':'symbol':'1.0-0' }}
+      </ng-container>
+
+
+    <!-- 'invNetIn', -->
+      <ng-container matColumnDef="invNetIn">
+        <th mat-header-cell *matHeaderCellDef>
+            Inv Net Inc</th>
+        <td mat-cell *matCellDef="let element">
+            {{element.investmentNetIncome | currency: 'USD':'symbol':'1.0-0' }}
+      </ng-container>
+
+
+    <!-- 'bigExp', -->
+      <ng-container matColumnDef="bigExp">
+        <th mat-header-cell *matHeaderCellDef>
+            Big Exp</th>
+        <td mat-cell *matCellDef="let element">
+            {{element.bigExpenses | currency: 'USD':'symbol':'1.0-0' }}
+      </ng-container>
+
+      <!-- 'bigExpDescr', -->
+      <ng-container matColumnDef="bigExpDescr">
+        <th mat-header-cell *matHeaderCellDef>
+            Desc</th>
+        <td mat-cell *matCellDef="let element">
+            {{element.bigExpensesDescription}}
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns sticky:true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns let i = index"
+      (click)="highlight(row, i)"
+      [class.selected-row]="selectedRow === row">
+
+      
+
+
+    </table>
+  </div>
+

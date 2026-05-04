@@ -1,0 +1,17 @@
+tbody #currentyear {
+  background-color:lightsteelblue;
+}
+
+tbody #regularyear {
+  background-color: rgba(248, 250, 250, 0.041);
+}
+
+
+.selected-row {
+  background-color: #459cda !important; /* Light blue example */
+}
+
+/* Optional: change cursor to pointer to indicate interactivity */
+.mat-mdc-row {
+  cursor: pointer;
+}

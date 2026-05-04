@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Edit Planner Details</h2>
+<mat-dialog-content>
+  <form [formGroup]="editForm" class="grid-container">
+    <mat-form-field>
+      <mat-label>Actual</mat-label>
+      <input matInput formControlName="rateOfReturn" placeholder="Rate of Return" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Inflation</mat-label>
+      <input matInput formControlName="inflation" placeholder="Inflation" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Ending Age</mat-label>
+      <input matInput formControlName="endingAge" placeholder="Ending Age" />
+    </mat-form-field>
+
+      <mat-form-field>
+      <mat-label>Income Tax Rate</mat-label>
+      <input matInput formControlName="incomeTaxRate" placeholder="Income Tax Rate" />
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button matButton="tonal" [disabled]="!editForm.valid" (click)="onSubmit()">Save</button>
+  <button matButton="tonal" (click)="onClose()">Close</button>
+</mat-dialog-actions>

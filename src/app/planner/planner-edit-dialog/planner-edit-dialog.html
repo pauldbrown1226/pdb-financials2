@@ -1,0 +1,85 @@
+<h2 mat-dialog-title>Edit Planner for year:&nbsp; {{ year }}</h2>
+<mat-dialog-content>
+  <mat-dialog-actions>
+    <button matButton="tonal" [disabled]="!editForm.valid" (click)="onSubmit()">Save</button>
+    <button matButton="tonal" (click)="onClose()">Close</button>
+  </mat-dialog-actions>
+</mat-dialog-content>
+
+<form [formGroup]="editForm" class="grid-container">
+
+      <mat-label>{{isActual(planner)}}</mat-label>
+
+        <mat-form-field>
+      <mat-label>Age</mat-label>
+      <input matInput formControlName="age"/>
+    </mat-form-field>
+
+        <mat-form-field>
+      <mat-label>Year</mat-label>
+      <input matInput formControlName="year"/>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Investment Total</mat-label>
+      <input matInput formControlName="investmentTotal" placeholder="Inv Total" />
+      @if(editForm.dirty && editForm.get('investmentTotal').value.length === 0) {
+      <mat-error>The Investment Total is Required</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Paul's Pension</mat-label>
+      <input matInput formControlName="paulPension" placeholder="Paul Pension" />
+      @if(editForm.dirty && editForm.get('paulPension').value.length === 0) {
+      <mat-error>Paul's Pension is required</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Paul's Social Security</mat-label>
+      <input matInput formControlName="paulSocialSecurity" placeholder="Paul SSA" />
+      @if(editForm.dirty && editForm.get('paulSocialSecurity').value.length === 0) {
+      <mat-error>Paul's Social Security is required</mat-error>
+      }
+    </mat-form-field>
+
+        <mat-form-field>
+      <mat-label>Naomis's Social Security</mat-label>
+      <input matInput formControlName="naomiSocialSecurity" placeholder="Naomi SSA" />
+      @if(editForm.dirty && editForm.get('naomiSocialSecurity').value.length === 0) {
+      <mat-error>Naomi's Social Security is required</mat-error>
+      }
+    </mat-form-field>
+
+        <mat-form-field>
+      <mat-label>Budget</mat-label>
+      <input matInput formControlName="budget" placeholder="Budget" />
+      @if(editForm.dirty && editForm.get('budget').value.length === 0) {
+      <mat-error>The Budget is required</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Income Tax</mat-label>
+      <input matInput formControlName="incomeTax" placeholder="Income Tax" />
+      @if(editForm.dirty && editForm.get('incomeTax').value.length === 0) {
+      <mat-error>Income Tax is required</mat-error>
+      }
+    </mat-form-field>
+
+
+    <mat-form-field>
+      <mat-label>Big Expenses</mat-label>
+      <input matInput formControlName="bigExpenses" placeholder="Big Expenses" />
+    </mat-form-field>
+
+    <mat-form-field class="description">
+      <mat-label>Description</mat-label>
+      <!-- <input matInput formControlName="bigExpensesDescription" placeholder="Description" /> -->
+      <textarea matInput rows="1" formControlName="bigExpensesDescription" placeholder="Description"></textarea>
+   </mat-form-field>
+
+
+
+</form>

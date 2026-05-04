@@ -1,0 +1,74 @@
+<h2 mat-dialog-title>Add Reserve</h2>
+
+<mat-dialog-content>
+  <div>
+    <mat-dialog-actions>
+      <h3>Running Total {{ reserveTotal | currency }}&nbsp;</h3>
+      <button matButton="tonal" (click)="onReset()">Reset</button>
+      <button matButton="tonal" (click)="onClose()">Close</button>
+      <button matButton="tonal" [disabled]="!editForm.valid" (click)="onSubmit()">Save</button>
+    </mat-dialog-actions>
+  </div>
+
+  <div class="table-container">
+    <form [formGroup]="editForm">
+      <mat-form-field class="custom-height-field">
+        <mat-label>Description</mat-label>
+        <input matInput formControlName="description" />
+        @if(editForm.dirty && editForm.get('description').value.length === 0) {
+        <mat-error>The Description is required</mat-error>
+        }
+      </mat-form-field>
+      <table mat-table [dataSource]="dataSource" [trackBy]="trackBy">
+        <!-- 'categoryName',  -->
+        <ng-container matColumnDef="categoryLabel">
+          <th mat-header-cell *matHeaderCellDef>Category</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.category.label }}
+          </td>
+        </ng-container>
+
+        <!-- 'balanceAmount',  -->
+        <ng-container matColumnDef="balanceAmount">
+          <th mat-header-cell *matHeaderCellDef>Balance Amount</th>
+          <td mat-cell *matCellDef="let element; let i = index">
+            {{ balanceEntries[i].amount }}
+          </td>
+        </ng-container>
+
+        <!-- 'amount', -->
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell *matHeaderCellDef>Amount</th>
+          <td mat-cell *matCellDef="let element; let i = index">
+            @if( i > 0) {
+            <mat-form-field class="custom-height-field">
+              <input type="number"
+                matInput
+                formControlName="{{ element.category.label }}"
+                (focusout)="calculateNewBlanace(i, element.category.label)"
+              />
+            </mat-form-field>
+                @if(editForm.dirty && editForm.get([element.category.label]).invalid) {
+                    <mat-error>Can' be more that $100,000The</mat-error>
+                } 
+            } @else {
+                {{ reserveTotal }}
+            }
+          </td>
+        </ng-container>
+
+        <!-- 'newBalance', -->
+        <ng-container matColumnDef="newBalance">
+          <th mat-header-cell *matHeaderCellDef>New Balance</th>
+          <td mat-cell *matCellDef="let element">
+            {{ '' + element.subtotal | currency }}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; let i = index; columns: displayedColumns"
+        [class.sticky-first-row]="i === 0"></tr>
+      </table>
+    </form>
+  </div>
+</mat-dialog-content>

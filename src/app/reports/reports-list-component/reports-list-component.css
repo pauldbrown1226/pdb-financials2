@@ -1,0 +1,39 @@
+.mat-mdc-row:nth-child(odd){
+    background-color: rgb(240, 251, 251)
+}
+
+
+.parent {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  width: 100%;
+  
+}
+
+.child {
+  display: flex;
+  justify-content: left; 
+  align-items: left;
+  width: 60%;
+  
+}
+
+.table-container {
+  display: flex;
+  justify-content: center;
+
+  height: 800px;
+  overflow: auto;
+  width: 100%;
+ /* background-color: yellow; */
+}
+
+
+table {
+  min-width: 60%; 
+  margin-left: auto;
+  margin-right: auto;
+  /* margin-left: 5%; */
+
+}

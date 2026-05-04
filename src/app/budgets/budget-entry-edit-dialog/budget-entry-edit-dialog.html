@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>Edit Budget Entry: </h2>
+<mat-dialog-content>
+  <form [formGroup]="editForm" class="grid-container">
+    <mat-form-field>
+      <mat-label>Annual Amount</mat-label>
+      <input matInput formControlName="annualAmount" placeholder="Annual Amount" (focusout)="calculateMonthlyAmount()"/>
+      @if(editForm.dirty) {
+      <mat-error>Please enter an amount less than $100,000</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Monthly Amount</mat-label>
+      <input matInput formControlName="monthlyAmount" placeholder="Monthly Amount">
+      @if(editForm.dirty ) {
+      <mat-error>Please enter an amount less than $100,000</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Category</mat-label>
+      <mat-select formControlName="categoryName">
+        @for (item of categories; track $index) {
+        <mat-option value="{{ item.name }}">{{ item.name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button matButton="tonal" [disabled]="!editForm.valid" (click)="onSubmit()">Save</button>
+  <button matButton="tonal" (click)="onClose()">Close</button>
+</mat-dialog-actions>

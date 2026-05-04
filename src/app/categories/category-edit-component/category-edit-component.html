@@ -1,0 +1,70 @@
+<h2 mat-dialog-title>Edit Category: {{category.label}}</h2>
+<mat-dialog-content>
+  <form [formGroup]="editForm" class="grid-container">
+    <mat-form-field>
+      <mat-label>Category Label</mat-label>
+      <input matInput formControlName="label" placeholder="Label" />
+      @if(editForm.dirty && editForm.get('label').value.length === 0) {
+      <mat-error>The Label is required</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Category Name</mat-label>
+      <input matInput formControlName="name" placeholder="Name" />
+      @if(editForm.dirty && editForm.get('name').value.length === 0) {
+      <mat-error>The Category Name is required</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Type</mat-label>
+      <mat-select formControlName="type">
+        <mat-option value="INCOME">Income</mat-option>
+        <mat-option value="EXPENSE">Expense</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Sub Type</mat-label>
+      <mat-select formControlName="subType">
+        <mat-option value="INCOME">Income</mat-option>
+        <mat-option value="EXPENSE">Expense</mat-option>
+        <mat-option value="LOAN">Loan</mat-option>
+        <mat-option value="HEADING">Heading</mat-option>
+        <mat-option value="TOTAL">Total</mat-option>
+        <mat-option value="GRAND_TOTAL">Grand Total</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Category Order</mat-label>
+      <mat-select formControlName="catOrder">
+        <option value="MASTER">Top</option>
+        <mat-option value="TOP">Top</mat-option>
+        <mat-option value="SUBCATEGORY1">Subcategory 1</mat-option>
+        <mat-option value="SUBCATEGORY2">Subcategory 2</mat-option>
+        <mat-option value="SUBCATMASTER">Subcategory Master</mat-option>
+        <mat-option value="MASTER">SUBCATEGORY1</mat-option>
+        <mat-option value="SINGLE">Single Expense</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Reserve Category</mat-label>
+      <mat-select formControlName="reserve">
+        <mat-option value="true">Yes</mat-option>
+        <mat-option value="false">No</mat-option>
+      </mat-select>
+    
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Budget Category</mat-label>
+      <mat-select formControlName="budget">
+        <mat-option value="true">Yes</mat-option>
+        <mat-option value="false">No</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button matButton="tonal" [disabled]="!editForm.valid" (click)="onSubmit()">Save</button>
+  <button matButton="tonal" (click)="onClose()">Close</button>
+</mat-dialog-actions>
