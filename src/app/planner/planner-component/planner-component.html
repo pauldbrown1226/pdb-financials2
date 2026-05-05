@@ -60,7 +60,7 @@
       <ng-container matColumnDef="actEst">
         <th mat-header-cell *matHeaderCellDef>
             Act/Est</th>
-        <td mat-cell *matCellDef="let element">
+        <td mat-cell *matCellDef="let element let i = index" id="{{ isHighLightRow(i, 0) }}">
           <a
           class="active"
           style="cursor: pointer; color: #007bff"

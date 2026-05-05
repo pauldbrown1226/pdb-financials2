@@ -69,7 +69,7 @@ export class PlannerComponent implements OnInit {
   numberRows = 0;
   selectedRow: Planner;
 
-  colNo = 0;
+  colNo = 999;
   numberOfCols = 0
 
 
@@ -110,6 +110,7 @@ export class PlannerComponent implements OnInit {
 
         this.highLightRow = 999;
         this.numberRows = this.planners.length;
+        this.numberOfCols = 18; // As of now
 
         this.isLoading = false;
       },
@@ -210,13 +211,15 @@ export class PlannerComponent implements OnInit {
   @HostListener('document:keyup', ['$event'])
   keyEvent(event: KeyboardEvent): void {
     
+    if (event.key === 'ArrowRight') {
+      // scroll right
     if (this.colNo < this.numberOfCols) {
         this.colNo++;
         return;
       } else if (this.colNo == 0) {
         return;
       }
-      
+    }
     
     if (event.key === 'ArrowUp') {
       // scroll up
@@ -249,6 +252,23 @@ export class PlannerComponent implements OnInit {
     this.highLightRow = index; 
     this.colNo = 0;
     console.log('Planner Component.selectedRow: ' + this.selectedRow);
+  }
+
+  isHighLightRow(index: number, colNo: number) {
+    if (colNo !== 999 && index === this.highLightRow) {
+      if (colNo === this.colNo) {
+        console.log('colNo = ', colNo + ' highLightCell');
+        // document.getElementById('row' + index).focus();
+        return 'highLightCell';
+      } else {
+        // console.log('row =', index);
+        // console.log('colNo = ', colNo + ' highLightRow');
+
+        return 'highLightRow';
+      }
+    } else {
+      return '';
+    }
   }
 
   openAlertMessageModal(message: string, isError: boolean) {

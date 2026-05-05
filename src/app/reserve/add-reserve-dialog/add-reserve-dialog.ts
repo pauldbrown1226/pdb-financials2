@@ -33,11 +33,12 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { CurrencyPipe } from '@angular/common';
 import { Category } from '../../models/category-model';
 
+
 @Component({
   selector: 'app-add-reserve-dialog',
   imports: [
+    
     MatTableModule,
-    ReactiveFormsModule,
     MatInputModule,
     MatFormFieldModule,
     MatDialogModule,
@@ -62,8 +63,9 @@ export class AddReserveDialog implements OnInit {
   displayedColumns: string[] = ['categoryLabel', 'balanceAmount', 'amount', 'newBalance'];
   displayTotalColumns: string[];
 
-  editForm: FormGroup;
   private fb = new FormBuilder();
+  editForm: FormGroup;
+  
 
   controls: FormArray;
 

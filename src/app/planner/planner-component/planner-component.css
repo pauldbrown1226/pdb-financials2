@@ -15,3 +15,7 @@ tbody #regularyear {
 .mat-mdc-row {
   cursor: pointer;
 }
+
+#highLightCell {
+  background-color: rgb(135, 250, 150);
+}

@@ -40,6 +40,7 @@ import { Alert } from '../../shared/alert/alert';
 
 @Component({
   selector: 'app-edit-category-component',
+  standalone: true,
   imports: [
     ReactiveFormsModule,
     MatDialogContent,

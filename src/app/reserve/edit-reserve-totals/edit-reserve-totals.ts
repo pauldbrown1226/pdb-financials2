@@ -5,12 +5,14 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogContent, MatDialogModule, MatDialo
 import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReserveTotals } from '../../models/reserve-totals.model';
+import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
+  standalone: true, 
   selector: 'app-edit-reserve-totals',
   imports: [
-    ReactiveFormsModule,
     MatFormFieldModule,
+    BrowserModule,
     MatDialogModule,
     MatDialogContent,
     MatLabel,
